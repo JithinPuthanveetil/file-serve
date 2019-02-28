@@ -1,7 +1,7 @@
 package config
 
 // Root is the root directory
-const Root = ""
+var Root = ""
 
 // Template is the html template
 const Template = `

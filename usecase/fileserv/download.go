@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/file-serve/model"
 )
@@ -28,9 +29,9 @@ func (r *ShowFileRequest) DownloadFile() (*model.Server, error) {
 		if err != nil {
 			return nil, err
 		}
-
+		root := filepath.Base(fileInfo.Name())
 		return &model.Server{
-			Root:       fileInfo.Name(),
+			Root:       strings.Replace(root, " ", "_", strings.Count(root, " ")),
 			Data:       buf,
 			IsDownload: true,
 		}, nil
@@ -40,7 +41,7 @@ func (r *ShowFileRequest) DownloadFile() (*model.Server, error) {
 }
 
 func downloadDirectory(root string) (*model.Server, error) {
-	zipRoot := filepath.Base(root) + ".zip"
+	zipRoot := strings.Replace(filepath.Base(root), " ", "_", strings.Count(filepath.Base(root), " ")) + ".zip"
 
 	file, err := os.Create(zipRoot)
 	if err != nil {

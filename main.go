@@ -1,11 +1,20 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"net/http"
 
+	"github.com/file-serve/handler/config"
+
 	"github.com/file-serve/handler/v1"
 )
+
+func init() {
+	pathFlag := flag.String("p", "", "path to the directory")
+	flag.Parse()
+	config.Root = *pathFlag
+}
 
 func main() {
 	r := v1.Route()
