@@ -4,6 +4,8 @@ Serve files and folders using go
 
 ## Usage
 
+go get github.com/jithinputhanveetil/file-serve
+
 ```
     Usage: file-serve [option]
     
